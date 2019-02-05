@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace filters
 {
@@ -6,7 +9,20 @@ namespace filters
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            List<OlympicWinner> winners;
+
+            using (StreamReader file = File.OpenText(@".\data\olympicWinnersSmall.json"))
+            {
+                winners = JsonConvert.DeserializeObject<List<OlympicWinner>>(file.ReadToEnd());
+            }
+            
+            Console.WriteLine($"Winners count: {winners.Count}.");
+
+            foreach (var winner in winners.FindAll(w => w.Athlete == "Chris Hoy"))
+            {
+                Console.WriteLine(winner.Details());
+            };
+
         }
     }
 }
