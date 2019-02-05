@@ -2,7 +2,8 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-public class OlympicWinner {
+public class OlympicWinner 
+{
     public string Athlete { get; set; }
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public int? Age { get; set; }
